@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Number.EPSILON 是js中表示最小精度的
+        let equal = (a,b) => {
+         // |a-b|<最小精度a=b
+         if(Math.abs(a-b)<Number.EPSILON){
+             return true;
+         }else{
+             return false;
+         }
+     }
+     console.log(0.1 + 0.2 === 0.3);//f
+     console.log(equal(0.1 + 0.2,0.3));//t
+     
+    //Number.isfinite 检测一个数值是否为有限数
+     console.log(Number.isFinite(100))//t
+     console.log(Number.isFinite(100/0))//f
+     console.log(Number.isFinite(Infinity))//f
+
+     //Number.isNaN 检测一个数值是否是NaN
+
+     //Number.parseInt/parseFloat 字符串转整数
+      console.log(Number.parseInt('dj1.235.ifs'));//NaN
+      console.log(Number.parseInt('1.235.ifs'));//1
+      console.log(Number.parseInt('-11.235.ifs'));//-11
+      console.log(Number.parseFloat('1.235.ifs'));//1.235
+
+      //Number.isInteger 判断一个数是否为整数
+      console.log(Number.isInteger(-2+-2))//t
+      //Math.trunc 将数字的小数部分抹掉
+      console.log(Math.trunc(23.6645))
+      //Math.sign 判断一个数是正数还是负数还是零
+      console.log(Math.sign(10));//返回1
+      console.log(Math.sign(-10));//返回-1
+      console.log(Math.sign(0));//返回0
+      console.log(Math.sign('js'));//NaN
+
+      console.log(Math.PI);//圆周率
+      console.log(Math.max(100,200));//使用math直接求最大值
+      
+    //绝对值
+         console.log(Math.abs(-1));//1
+         console.log(Math.abs('-1'));//1  隐式转化 字符串的数字转化为数值型
+         console.log(Math.abs('zxw'));//NaN
+         //三个取整的方法
+         console.log(Math.floor(2.1));//2 向下取整 往小的地方取
+         console.log(Math.floor(2.9));//2 向下取整 往小的地方取
+         console.log(Math.floor(-2.1));//-3 向下取整 往小的地方取
+         console.log(Math.floor(-2.9));//-3 向下取整 往小的地方取
+         console.log(Math.floor('2.1'));//2  隐式转化 
+         console.log(Math.floor('zxw'));//NaN
+         //Math.ceil向上取整 往大的取
+         console.log(Math.ceil(2.1));//3
+         console.log(Math.ceil(2.9));//3
+         console.log(Math.ceil(-2.1));//-2 
+         console.log(Math.ceil(-2.9));//-2
+         console.log(Math.ceil('2.1'));//3  隐式转化 
+         console.log(Math.ceil('zxw'))//NaN
+         //Math.around四舍五入
+         console.log(Math.round(2.1));//2
+         console.log(Math.round(2.9));//3
+         console.log(Math.round(2.5));//3
+         console.log(Math.round(-2.1));//-2
+         console.log(Math.round(-2.9));//-3
+         console.log(Math.round(-2.5));//-2
+         //random随机数
+        //random()返回一个随机的小数[0,1)
+         // random()中不跟参数
+ 
+
+       
+
+
+
+     
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .right{
+            color: green;
+        }
+        .wrong{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="请输入用户名"><span class="span">请输入6~16位数字或字母</span>
+    <script>
+        //正则表达式是用于匹配字符串字符组合的模式 正则表达式是一个对象
+        //正则表达式用来检索 替换那些符合某个模式的文本 例如表单验证 过滤掉页面中的敏感词 或从字符串中获取想要的特定部分
+
+        //创建正则表达式
+        //利用regexp对象创建 正则表达式
+        var regexp=new RegExp(/123/);
+        
+        //利用字面量创建正则表达式
+         var rg=/123/;
+        console.log(rg);
+         //测试正则表达式test() 用于检测字符串是否符合该规则 该对象会返回true或false 其参数是测试字符串
+         //regexpobj.text(str) regexpobj是正则表达式 str测试文本
+         console.log(rg.test(123));
+
+
+
+         //正则表达式中特殊字符的组合 特殊意义的字符称为元字符^$
+         //正则表达式不需要加引号 
+
+         //边界符^$
+         var rg1=/abcd/;//只要包含abcd这个字符串返回的都是true
+         console.log(rg1.test('abc'));//false 没有全部包含
+         console.log(rg1.test('abcde'));//true
+
+         var rg2=/^abcd/;//必须以abcd开头
+         console.log(rg2.test('abcde'));//T
+         console.log(rg2.test('eabcd'));//F
+         console.log(rg2.test('abc'));//F
+
+         var rg3=/^abcd$/;//只能是abcd 
+         console.log(rg3.test('abcde'));//F
+         console.log(rg3.test('abcd'));//T
+         console.log(rg3.test('abdc'));//F
+
+         //字符类 [] 表示有一系列字符可供选择 只要匹配一个就可以
+         var rg4=/[abcd]/; //只要包含任意一个abcd都返回true
+         console.log(rg4.test('abc'));//T
+         console.log(rg4.test('abccd'));//T
+         console.log(rg4.test('1abc'));//T
+
+         var rg5=/^[abc]$/;//除了a b c其他都是F
+         console.log(rg5.test('a1c'));//F
+         console.log(rg5.test('a'));//T
+         console.log(rg5.test('c'));//T
+
+         var rg6=/^[A-Z]$/ //26个大写字母选一个
+         console.log(rg6.test('a'));//F
+         console.log(rg6.test('A'));//T
+
+
+         var rg7=/^[a-zA-Z0-9_-]$/ //26个大小写字母0-9数字-_任意一个返回
+         console.log(rg7.test('a'));//T
+         console.log(rg7.test('!'));//F
+
+         var rg8=/^[^a-zA-Z0-9_-]$/ //如果[^]表示取反里面的都不能选择
+         console.log(rg8.test('a'));//F
+         console.log(rg8.test('!'));//T
+
+
+         //量词符 用来设定某个模式出现的次数
+         //设定一个字符可以出现几次
+
+        var re9=/^a*$/; //*相当于>=0 可以出现0次或者多次
+        console.log(re9.test(''));//t
+        console.log(re9.test('a'));//t
+        console.log(re9.test('aaaa'));//t
+
+        var re10=/^a+$/; //+相当于>=1 一次或者多次
+        console.log(re10.test(''));//f
+        console.log(re10.test('a'));//t
+        console.log(re10.test('aaaa'));//t
+
+
+        var re11=/^a?$/; //?相当于1||0 1次或者0次
+        console.log(re11.test(''));//t
+        console.log(re11.test('a'));//t
+        console.log(re11.test('aaaa'));//f
+
+        var re12=/^a{3}$/; //{3}表示前面的字符只能出现三次
+        console.log(re12.test('a'));//f
+        console.log(re12.test('aaa'));//t
+        console.log(re12.test('aaaa'));//f
+
+
+        var re13=/^a{3,}$/; //{3,}表示前面的字符可以出现三次或者三次以上
+        console.log(re13.test('a'));//f
+        console.log(re13.test('aaa'));//t
+        console.log(re13.test('aaaa'));//t
+
+        var re14=/^a{1,3}$/; //{1,3}表示前面的字符大于等于1小于等于3
+        console.log(re14.test('a'));//t
+        console.log(re14.test('aaa'));//t
+        console.log(re14.test('aaaa'));//f
+
+
+        //表单验证限制
+        var re15=/^[a-zA-Z0-9]{6,16}$/;
+        var inp =document.querySelector('input');
+        var span =document.querySelector('span');
+        inp.onblur=function(){
+            if(re15.test(inp.value)){
+                span.className='right';
+                span.innerHTML='输入格式正确'
+            }else{
+                span.className='wrong';
+                span.innerHTML='输入格式错误'
+            }
+        }
+
+
+        //中括号 字符集合 匹配方括号中的任意字符
+        var re16=/^[abc]$/ //三选一 单独的a b c为true 其他的都是false
+        //大括号 量词符 
+        var re17=/^abc{3}$/ //让c重复三次 abccc true  其他都是false
+        //小括号 表示优先级
+        var re18=/^(abc){3}$/  //让abc重复三次
+
+
+
+        //预定义类 指的是某些常见模式的简写
+        //  /^\d$/  [0-9]其中一个
+        //  /^\D$/  [^0-9] 非数字
+        // /^\w$/   [0-9A-Za-z_] 数字字母下划线中的一个
+        // /^\W$/   [^0-9A-Za-z_] 除了数字字母下划线中的一个
+        // /^\s$/   [\t\r\n\v\f] 匹配空格 包括换行符 制表符 空格符
+        // /^\S$/   [^\t\r\n\v\f] 非空
+
+            //座机号码验证 全国座机号码 010-12345678 0530-1234567
+            //正则表达式中或者符号 |
+            var re19=/^\d{3}-\d{8}$/|/^\d{4}-\d{7}$/
+
+        //正则表达式的替换 替换replace()方法可以实现替换字符串操作 用来替换的参数可以是一个字符串
+        //或者是一个正则表达式  第一个参数：被替换的字符串或者正则表达式
+        //第二个参数：替换为的字符串
+        // 返回的值是一个替换完毕的新字符串
+        var str  = 'andy和red';
+        //var newStr=str.replace('andy','baby');
+        // /表达式/[switch] switch也称修饰符 g:全局匹配 i:忽略大小写 gi:全局匹配+忽略大小写
+
+        
+
+            
+
+
+
+    </script>
+</body>
+</html>

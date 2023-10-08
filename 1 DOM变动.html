@@ -1,0 +1,49 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		<h1>文本</h1>
+		<ul id="ul"></ul>
+		<button id="btn">点击插入li</button>
+	</body>
+	<script>
+		const ul = document.getElementById("ul")
+		const btn = document.getElementById("btn")
+		const createFragment = () => {
+			const fruits = ["apple", "bread", "rice", "water"]
+			const documentFragment = new DocumentFragment()
+			for (const fruit of fruits) {
+				let li = document.createElement("li")
+				li.textContent = fruit
+				documentFragment.appendChild(li)
+			}
+			return ul.appendChild(documentFragment)
+		}
+
+		btn.addEventListener("click", () => createFragment(), false)
+
+		//观察器的回调
+		const callback = (mutations, observer) => {
+			for (const mutation of mutations) {
+				console.log(mutation)
+			}
+		}
+		//创建一个观察器实例
+		const observer = new MutationObserver(callback)
+		//观察节点变化的配置对象
+		const options = {
+			childList: true,
+			attributes: true, //属性的变动
+			CharacterData: true, //节点或文本的变动
+		}
+		observer.observe(ul, options)
+		//observer.disconnect() //停止观察
+	</script>
+</html>

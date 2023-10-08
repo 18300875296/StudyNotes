@@ -1,0 +1,19 @@
+	<script>
+	/**
+	 * 哈希模式是在url后面加上#以及后面的字符串作为一个描点,实现页面定位
+	 * 哈希值的改变不会使浏览器发出请求，监听hashchange事件以实现对页面前进后退的控制
+	 */
+	// 定义Router
+	class Router{
+		constructor(){
+			this.routes = new Map(); // 存放路由路径和callback
+			this.current_path = '' 
+			// 监听路由change调用对应的路由
+			window.addEventListener('load',this.refresh,false)
+			window.addEventListener('hashchange',this.refresh,false)
+		}
+		route(path)
+		
+		
+	}
+</script>

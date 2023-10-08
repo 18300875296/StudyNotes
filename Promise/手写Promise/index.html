@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./1.初始化Promise.js"></script>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve,reject)=>{
+            //三种情况可以改变promise的状态
+            resolve('ok');
+            // reject();
+            //抛出错误
+            //throw 'error'
+            
+            //并且状态只能修改一次
+        })
+        p.then(value=>{
+            console.log(value)
+        },reason=>{
+
+        })
+    </script>
+</body>
+</html>

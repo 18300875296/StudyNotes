@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 使用Promise进行封装
+        const p = new Promise((resolve,reject)=>{
+        // 创建对象
+        const xhr = new XMLHttpRequest();
+        // 初始化
+        xhr.open('GET','http://127.0.0.1:8000/server');
+        // 发送
+        xhr.send();
+        // 绑定事件  处理响应结果
+        xhr.onreadystatechange = ()=>{
+            //判断状态  说明进入了最后一个阶段
+            if(xhr.readyState === 4){
+                //判断响应状态码2xx~3xx
+                if(xhr.status >= 200 && xhr.status <= 300){
+                    resolve(xhr.response);
+                }else{
+                    //如果失败
+                    reject(xhr.status);
+                }
+            }
+        }
+    })
+    p.then((function(value){
+        console.log(value);
+    }),(function(reason){
+        console.log(reason);
+    }));
+    </script>
+</body>
+</html>
